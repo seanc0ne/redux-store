@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
-import { useStoreContext } from '../utils/GlobalState';
-import { QUERY_PRODUCTS } from '../utils/queries';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Cart from "../components/Cart";
 import {
-  UPDATE_PRODUCTS,
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
   ADD_TO_CART,
- } from '../utils/actions';
-import spinner from '../assets/spinner.gif';
-import Cart from '../components/Cart';
-import { idbPromise } from '../utils/helpers';
+  UPDATE_PRODUCTS,
+} from "../utils/actions";
+import { QUERY_PRODUCTS } from "../utils/queries";
+import { idbPromise } from "../utils/helpers";
+import spinner from '../assets/spinner.gif'
 
 function Detail() {
-  const [state, dispatch] = useStoreContext();
+  //redux
+  const dispatch = useDispatch();
+  const state = useSelector(state => state);
   const { id } = useParams();
 
   const [currentProduct, setCurrentProduct] = useState({});
